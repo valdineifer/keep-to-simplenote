@@ -16,3 +16,5 @@ PT: Este script converte anotações Google Keep (exportadas pelo Google Takeout
 ## To-Do
 * [ ] Improve the `--verbose` option
 * [ ] Improve code for both situations (directory or json file)
+* [ ] Support notes with checkboxes
+* [ ] Create a simplenote tag when it appears the hashtag symbol (`#`)
