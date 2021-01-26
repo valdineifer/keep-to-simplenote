@@ -1,7 +1,7 @@
 module.exports = (originalJson) => {
     let tags = []
 
-    if (originalJson.labels && originalJson.labels.length !== 0) {
+    if (Array.isArray(originalJson.labels) && originalJson.labels.length !== 0) {
         originalJson.labels.forEach(label => {
             tags.push(label.name)
         })
@@ -9,7 +9,7 @@ module.exports = (originalJson) => {
 
     return {
         id: originalJson.id,
-        content: originalJson.textContent,
+        content: originalJson.title + '\r\n\r\n' + originalJson.textContent,
         creationDate: new Date(),
         lastModified: new Date(),
         tags,

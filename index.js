@@ -1,23 +1,37 @@
 const fs = require('fs')
 const path = require('path')
-const convertJson = require('./src/convertJson')
+const convertKeepToSimplenote = require('./src/convertKeepToSimplenote')
 const createFinalJsonFile = require('./src/createFinalJsonFile')
-const readFile = require('./src/readFile')
-
-const originalFilePath = path.resolve(process.argv[2])
 
 try {
-    if(fs.existsSync(originalFilePath)) {
-        const originalJson = readFile(originalFilePath)
+    const fullPath = path.resolve(process.argv[2])
+    const option = process.argv[3]
+    const verbose = option === '-v' || option === '--verbose' ? true : false
 
-        console.log(originalJson)
-
-        const fileName = originalJson.title
-        const finalJson = convertJson(originalJson)
-
-        return createFinalJsonFile(fileName, finalJson)
+    if (fullPath.endsWith('.json')) {
+        convertKeepToSimplenote(fullPath, verbose)
     } else {
-        throw 'The file does not exist'
+        const dirItems = fs.readdirSync(fullPath)
+        const dateMili = new Date().getTime()
+
+        let finalJson = {
+            activeNotes: [],
+            trashedNotes: []
+        }
+
+        dirItems.forEach(item => {
+            if (item.endsWith('.json')) {
+                const converted = convertKeepToSimplenote(path.resolve(fullPath + '/' + item), verbose)
+
+                if (converted[0] === true) {
+                    finalJson.trashedNotes.push(converted[1])
+                } else {
+                    finalJson.activeNotes.push(converted[1])
+                }
+            }
+        })
+
+        createFinalJsonFile(dateMili, finalJson)
     }
 } catch (err) {
     console.error(err)

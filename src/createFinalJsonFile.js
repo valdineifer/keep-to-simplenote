@@ -8,8 +8,6 @@ module.exports = (fileName, jsonContent) => {
             throw err
         }
 
-        console.log('The JSON content has been converted successfully.')
+        console.log('\nThe JSON content has been converted ✨successfully✨.')
     })
-
-    return 0
 }
