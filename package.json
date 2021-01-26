@@ -1,0 +1,12 @@
+{
+  "name": "keep-to-simplenote",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Convert Google Keep export file to Simplenote file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Valdinei Ferreira",
+  "license": "ISC"
+}
