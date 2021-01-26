@@ -9,7 +9,7 @@ try {
     const verbose = option === '-v' || option === '--verbose' ? true : false
 
     if (fullPath.endsWith('.json')) {
-        convertKeepToSimplenote(fullPath, verbose)
+        convertKeepToSimplenote(fullPath)
     } else {
         const dirItems = fs.readdirSync(fullPath)
         const dateMili = new Date().getTime()
