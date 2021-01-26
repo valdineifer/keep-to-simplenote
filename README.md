@@ -15,3 +15,4 @@ PT: Este script converte anotações Google Keep (exportadas pelo Google Takeout
 
 ## To-Do
 * [ ] Improve the `--verbose` option
+* [ ] Improve code for both situations (directory or json file)

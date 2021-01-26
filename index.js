@@ -8,16 +8,26 @@ try {
     const option = process.argv[3]
     const verbose = option === '-v' || option === '--verbose' ? true : false
 
+    let finalJson = {
+        activeNotes: [],
+        trashedNotes: []
+    }
+    
     if (fullPath.endsWith('.json')) {
-        convertKeepToSimplenote(fullPath)
+        const dateMili = new Date().getTime()
+        const converted = convertKeepToSimplenote(fullPath)
+
+        if (converted[0] === true) {
+            finalJson.trashedNotes.push(converted[1])
+        } else {
+            finalJson.activeNotes.push(converted[1])
+        }
+
+        createFinalJsonFile(dateMili, finalJson)
     } else {
         const dirItems = fs.readdirSync(fullPath)
         const dateMili = new Date().getTime()
 
-        let finalJson = {
-            activeNotes: [],
-            trashedNotes: []
-        }
 
         dirItems.forEach(item => {
             if (item.endsWith('.json')) {
