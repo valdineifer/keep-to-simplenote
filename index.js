@@ -12,6 +12,10 @@ try {
         activeNotes: [],
         trashedNotes: []
     }
+
+    if (!fs.existsSync('storage/')) {
+        fs.mkdirSync('storage')
+    }
     
     if (fullPath.endsWith('.json')) {
         const dateMili = new Date().getTime()
